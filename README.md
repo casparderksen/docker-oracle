@@ -19,4 +19,4 @@ previously built database.
 
 Check your Oracle license! A developer license only allows deployment on physical development PCs.
 In general, Oracle does not allow soft partitioning and requires a license for the entire cluster
-on which an instance is deployed. 
+on which an instance is deployed.
