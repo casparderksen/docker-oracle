@@ -4,7 +4,7 @@ This project configures and deploys an Oracle database in a Docker container for
 
 # Prerequisites
 
-First build an Oracle container as described in [https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance](https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance). For Oracle Database 12.2.0.1 Enterprise Edition
+First build an Oracle container image as described in [https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance](https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance). For Oracle Database 12.2.0.1 Enterprise Edition
 this involves the following steps:
 
 1. Place `linuxx64_12201_database.zip` in `dockerfiles/12.2.0.1`.
@@ -17,6 +17,6 @@ previously built database.
 
 # Caution: Oracle licensing
 
-Check your Oracle license! A developer license only allows deployment on physical development PCs.
+Check your Oracle license! A developer license only allows deployment on a physical development PC.
 In general, Oracle does not allow soft partitioning and requires a license for the entire cluster
 on which an instance is deployed.
