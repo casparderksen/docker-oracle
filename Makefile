@@ -1,6 +1,14 @@
-TAG		= my/oradb
+TAG	= my/oradb
 IMAGE	= oracle/database:12.2.0.1-ee
 FILE	= images/oradb-12201-ee.tgz
+
+ifeq ($(shell uname -s), Linux)
+	XARGS_ARGS = --no-run-if-empty
+	ZCAT = zcat
+else
+	XARGS_ARGS =
+	ZCAT = gzcat
+endif
 
 .PHONY: default
 default: build
@@ -17,15 +25,15 @@ run: build
 
 .PHONY: logs
 logs:
-	docker ps -q -f ancestor=$(TAG) | xargs docker logs -f
+	docker ps -q -f ancestor=$(TAG) | xargs $(XARGS_ARGS) docker logs -f
 
 .PHONY: stop
 stop:
-	-docker ps -q -f ancestor=$(TAG) | xargs docker stop
+	-docker ps -q -f ancestor=$(TAG) | xargs $(XARGS_ARGS) docker stop
 
 .PHONY: rm
 rm: stop
-	-docker ps -a -q -f ancestor=$(TAG) | xargs docker rm -f
+	-docker ps -a -q -f ancestor=$(TAG) | xargs $(XARGS_ARGS) docker rm -f
 
 .PHONY: rmi
 rmi:
@@ -37,14 +45,14 @@ save:
 
 .PHONY: load
 load:
-	gzcat $(FILE) | docker load
+	$(ZCAT) $(FILE) | docker load
 
 .PHONY: clean
 clean: stop rmi
 
 .PHONY: clobber
 clobber: clean
-	-docker images | tail -n +2 | awk '$$1 == "<none>" {print $$3}' | xargs docker rmi -f
+	-docker images | tail -n +2 | awk '$$1 == "<none>" {print $$3}' | xargs $(XARGS_ARGS) docker rmi -f
 
 .PHONY: pristine
 pristine: clobber
