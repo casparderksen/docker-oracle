@@ -29,14 +29,15 @@ Edit [docker/Dockerfile](docker/Dockerfile) to modify SID and PDB.
 
 ## Persistent volume
 
-The database is located in `/opt/oracle/oradata`. The `run` target in (Makefile)[Makefile]
-mounts this directory on a volume `oradata`, in order to persist the database between runs.
+In the container, the database is located at `/opt/oracle/oradata`. The `run`
+target in [Makefile](Makefile) mounts this directory on a volume `oradata`, in
+order to persist the database between runs.
 
 # Building an running the database
 
 Use
 
-    ORACLE_PWD=_<password>_ make run
+    ORACLE_PWD=<password> make run
     
 to build and run the database, and set the database password.  The first run
 will will create a database in a volume `oradata`. Consequent runs will mount
@@ -57,10 +58,10 @@ Connect as user `myschema` (service):
 
 Lookup the container id with `docker ps`.
 
-    docker exec -it _<container-id>_ bash
+    docker exec -it <container-id> bash
 
 # Caution: Oracle licensing
 
-Check your Oracle license! A developer license only allows deployment on a physical development PC.
-In general, Oracle does not allow soft partitioning and requires a license for the entire cluster
-on which an instance is deployed.
+Check your Oracle license! A developer license only allows deployment on a
+physical development PC.  In general, Oracle does not allow soft partitioning
+and may require a license for the entire cluster on which an instance is deployed.
