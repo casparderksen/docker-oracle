@@ -36,11 +36,28 @@ mounts this directory on a volume `oradata`, in order to persist the database be
 
 Use
 
-    ORACLE_PWD=_\<password\>_ make run
+    ORACLE_PWD=_<password>_ make run
     
 to build and run the database, and set the database password.  The first run
 will will create a database in a volume `oradata`. Consequent runs will mount
-the previously built database.
+the previously built database. If `ORACLE_PWD` is unset, the password will
+not be changed.
+
+# Connecting to the database
+
+Connect as user `system` (service):
+
+	jdbc:oracle:thin:@//localhost:1521/ORCLCDB
+
+Connect as user `myschema` (service):
+
+	jdbc:oracle:thin:@//localhost:1521/ORCLPDB1
+
+# Accessing the container
+
+Lookup the container id with `docker ps`.
+
+    docker exec -it _<container-id>_ bash
 
 # Caution: Oracle licensing
 
