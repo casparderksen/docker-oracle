@@ -1,6 +1,6 @@
 TAG	= my/oradb
-IMAGE	= oracle/database:12.2.0.1-ee
-FILE	= images/oradb-12201-ee.tgz
+IMAGE	= oracle/database:19.3.0-ee
+FILE	= images/oradb-193000-ee.tgz
 
 ifeq ($(shell uname -s), Linux)
 	XARGS_ARGS = --no-run-if-empty

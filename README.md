@@ -10,7 +10,12 @@ this involves the following steps:
 1. Place `linuxx64_12201_database.zip` in `dockerfiles/12.2.0.1`.
 2. Go to `dockerfiles` and run `buildDockerImage.sh -v 12.2.0.1 -e`
 
-Afterwards you can run `make save` and `make load` to export and import the image to file.
+For Oracle Database 19.3.0 Enterprise Edition:
+
+1. Place `LINUX.X64_193000_db_home.zip` in `dockerfiles/19.3.0`.
+2. Go to `dockerfiles` and run `buildDockerImage.sh -v 19.3.0 -e`
+
+Afterwards return to this project and run `make save` and `make load` to export and import the image to file.
 
 # Configuration
 
@@ -44,6 +49,8 @@ will will create a database in a volume `oradata`. Consequent runs will mount
 the previously built database. If `ORACLE_PWD` is unset, the password will
 not be changed.
 
+Type `make logs` to view and follow the container log and see when the database is ready.
+
 # Connecting to the database
 
 Connect as user `system` (service):
@@ -59,6 +66,10 @@ Connect as user `myschema` (service):
 Lookup the container id with `docker ps`.
 
     docker exec -it <container-id> bash
+
+# Importing and exporting the container image
+
+Use `make save` and `make load` to export resp. import the container image.
 
 # Caution: Oracle licensing
 
